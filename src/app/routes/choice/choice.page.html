@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      红包雨
+    </ion-title>
+    <ion-label slot="end">
+      已抢：{{ total }}
+    </ion-label>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="rain-content">
+    <div *ngFor="let item of packs" class="rain"
+         [ngStyle]="{'left': item.left + '%', 'top': item.top + '%', 'animation-delay': item.delay + 's', 'opacity': item.opacity}"
+         (click)="triggerConfirm(item)">
+      <img [src]="'./../../../assets/img/red-pack-small.png'" alt="pack">
+    </div>
+  </div>
+</ion-content>

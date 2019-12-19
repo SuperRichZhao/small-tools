@@ -18,7 +18,7 @@ import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(),
+    IonicModule.forRoot({ backButtonText: '返回', mode: 'ios' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,

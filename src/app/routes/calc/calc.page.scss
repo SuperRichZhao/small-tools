@@ -1,0 +1,71 @@
+ion-header {
+  border-bottom: 1px solid #eaeaea;
+}
+.month-days .item {
+  width: 14.28%;
+  height: 3rem;
+  display: inline-block;
+  padding: 0.5rem;
+  text-align: center;
+}
+
+.month-days .item .checked {
+  //background: dodgerblue !important;
+  //color: white;
+  filter: invert(100%);
+}
+
+.month-days .item .today {
+  //background: #8c8c8c;
+  //color: #ffffff;
+  filter: invert(100%);
+}
+
+.month-days .item .value {
+  height: 2rem;
+  width: 2rem;
+  //border-radius: 50%;
+  line-height: 2rem;
+  text-align: center;
+  //background: dodgerblue;
+  //color: white;
+  margin: auto;
+}
+
+.month-days .item .rest {
+  background: url('./../../../../src/assets/img/star.png') no-repeat;
+  background-size: auto 2rem;
+  color: red !important;
+}
+
+.month-days .item .work {
+  background: url('./../../../../src/assets/img/heart.png') no-repeat;
+  background-size: auto 2rem;
+  color: white !important;
+}
+
+.month-days .item .point {
+  height: 0.5rem;
+  width: 100%;
+  display: block;
+}
+
+.month-days .item .point span {
+  display: block;
+  height: 0.3rem;
+  width: 0.3rem;
+  border-radius: 50%;
+  margin: 0.2rem auto;
+}
+
+.month-days .item .point .rest {
+  background: #0ec254;
+}
+
+.month-days .item .point .work {
+  background: #c2372d;
+}
+
+.month-days .item .point .work-or-rest {
+  background: #c2b51c;
+}

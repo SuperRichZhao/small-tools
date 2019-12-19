@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      休息日历
+    </ion-title>
+<!--    <ion-buttons slot="primary">-->
+<!--      <ion-button color="danger" fill="outline">-->
+<!--        回到今天-->
+<!--      </ion-button>-->
+<!--    </ion-buttons>-->
+  </ion-toolbar>
+  <ion-grid>
+    <ion-row>
+      <ion-col class="ion-text-center" *ngFor="let item of weeks">
+        {{ item }}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-header>
+
+<ion-content>
+  <div *ngFor="let item of months">
+    <ion-item lines="none">
+      {{ item.year + '年' + item.month +'月' }}
+    </ion-item>
+    <ion-grid>
+      <ion-row class="month-days">
+        <div class="item" *ngFor="let val of item.days" (click)="triggerConfirm(val)">
+          <div *ngIf="val.day">
+            <div class="value" [ngClass]="{'checked': val.isChecked && val.isRest !== '2', 'today': val.isToday, 'rest': val.isRest === '0', 'work': val.isRest === '1'}">
+              {{ val.day }}
+            </div>
+            <div class="point">
+              <span [ngClass]="{'rest': val.isRest === '0', 'work': val.isRest === '1', 'work-or-rest': val.isRest === '2'}"></span>
+            </div>
+          </div>
+        </div>
+      </ion-row>
+    </ion-grid>
+  </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="getCalcAfter($event)">
+    <ion-infinite-scroll-content
+        loadingSpinner="bubbles"
+        loadingText="Loading more data...">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
+
+</ion-content>
