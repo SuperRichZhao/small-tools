@@ -43,8 +43,11 @@ export class CalcPage implements AfterViewInit {
     for (let i = 0; i < monthDays; i++) {
       const dayItem: DayItem = new DayItem();
       dayItem.year = '' + date.getFullYear();
-      dayItem.month = '' + (date.getMonth() + 1);
-      dayItem.day = '' + (i + 1);
+      const month = date.getMonth() + 1;
+      dayItem.month = (month < 10 ? '0' : '') + month;
+      console.log(dayItem.month);
+      const day = i + 1;
+      dayItem.day = (day < 10 ? '0' : '') + day;
       dayItem.gregorian = dayItem.year + '-' + dayItem.month + '-' + dayItem.day;
       dayItem.lunar = null;
       dayItem.isWeekend = (i % 7 === 6) || (i % 7 === 0);
@@ -60,7 +63,8 @@ export class CalcPage implements AfterViewInit {
     // 将月历添加到总月历里
     const monthItem = new MonthItem();
     monthItem.year = '' + date.getFullYear();
-    monthItem.month = '' + (date.getMonth() + 1);
+    const month = date.getMonth() + 1;
+    monthItem.month = (month < 10 ? '0' : '') + month;
     monthItem.days = days;
     return monthItem;
   }
@@ -119,15 +123,9 @@ export class CalcPage implements AfterViewInit {
     }
   }
 
-  // 初始化日期
-  initDate() {
-    // this.months.push(this.getMonthCalender(this.today));
-    this.getCalcAfter(null);
-    // this.getCalcBefore();
-  }
-
   ngAfterViewInit(): void {
-    this.initDate();
+    // 初始化日期
+    this.getCalcAfter(null);
   }
 
 }

@@ -1,5 +1,7 @@
 {
   "name": "small-tools",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

@@ -20,7 +20,7 @@ export class ChoicePage implements AfterViewInit {
     let initNumber = 0;
     let packs = [];
     for (let i = 0; i < 10; i++) {
-      let lefts = Math.floor(Math.random() * 20 + 2);
+      let lefts = Math.floor(Math.random() * 15 + 2);
       let delay = Math.floor(Math.random() * 50 + 2);
       initNumber += lefts;
       const packStyle = new PackStyle();
