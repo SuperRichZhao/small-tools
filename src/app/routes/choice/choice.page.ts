@@ -39,6 +39,7 @@ export class ChoicePage implements AfterViewInit {
     this.total ++;
     const index = this.packs.findIndex(val => val.id === item.id);
     this.packs[index].opacity = '0';
+    this.packs = [...this.packs];
     console.log('confirm')
   }
 

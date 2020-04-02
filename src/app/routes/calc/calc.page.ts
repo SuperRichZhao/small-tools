@@ -1,5 +1,6 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { MonthItem, DayItem } from './calc.model';
+import { GlobalService } from '../../shared/provider/global.service';
 
 @Component({
   selector: 'app-calc',
@@ -17,7 +18,12 @@ export class CalcPage implements AfterViewInit {
   // 星期几
   weeks: Array<string> = ['日', '一', '二', '三', '四', '五', '六'];
 
-  constructor() {}
+  // 第一天上班时间
+  selectWorkDate = '2020-03-29';
+
+  constructor(
+    private globalService: GlobalService
+  ) {}
 
   // 点击确定弹出小气泡
   triggerConfirm(value: DayItem) {
@@ -25,7 +31,6 @@ export class CalcPage implements AfterViewInit {
       item.days.map(val => val.isChecked = false);
     });
     value.isChecked = true;
-    console.log('onConfirm', value);
   }
 
   // 获取某个月份的日历
@@ -43,9 +48,8 @@ export class CalcPage implements AfterViewInit {
     for (let i = 0; i < monthDays; i++) {
       const dayItem: DayItem = new DayItem();
       dayItem.year = '' + date.getFullYear();
-      const month = date.getMonth() + 1;
-      dayItem.month = (month < 10 ? '0' : '') + month;
-      console.log(dayItem.month);
+      const monthTemp = date.getMonth() + 1;
+      dayItem.month = (monthTemp < 10 ? '0' : '') + monthTemp;
       const day = i + 1;
       dayItem.day = (day < 10 ? '0' : '') + day;
       dayItem.gregorian = dayItem.year + '-' + dayItem.month + '-' + dayItem.day;
@@ -57,7 +61,7 @@ export class CalcPage implements AfterViewInit {
         dayItem.isChecked = true;
       }
       dayItem.isRest = this.isWorkOrRest(new Date(dayItem.gregorian));
-      dayItem.background = dayItem.isRest === '0' ? 'star.png' : 'heart.png';
+      dayItem.background = dayItem.isRest === '0' ? 'heart.png' : 'star.png';
       days.push(dayItem);
     }
     // 将月历添加到总月历里
@@ -71,8 +75,8 @@ export class CalcPage implements AfterViewInit {
 
   // 计算是否是休息日
   isWorkOrRest(date: Date): string {
-    // 日期开始时间, 写死2019-9-25, 因为这天是上班第一天
-    const dateStart = new Date('2019-09-25').getTime();
+    // 日期开始时间, 根据页面选择第一天上班时间, 这天是上班第一天
+    const dateStart = new Date(this.selectWorkDate).getTime();
     const dateEnd = date.getTime();
     let difValue: number;
     if (dateStart > dateEnd) {
@@ -126,6 +130,18 @@ export class CalcPage implements AfterViewInit {
   ngAfterViewInit(): void {
     // 初始化日期
     this.getCalcAfter(null);
+  }
+
+  // 打开设置弹出框
+  changeFirstWorkDate(event) {
+    this.months = [];
+    this.globalService.showLoading().then(() => {
+      this.getCalcAfter(null);
+    });
+    setTimeout(() => {
+      this.globalService.closeLoding();
+    }, 500);
+    this.selectWorkDate = event.detail.value;
   }
 
 }

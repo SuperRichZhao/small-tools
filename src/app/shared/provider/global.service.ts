@@ -75,7 +75,7 @@ export class GlobalService {
 	// 显示加载中
 	async showLoading () {
 		const loading = await this.loadingController.create({
-			spinner: 'bubbles',
+			spinner: 'circles',
 			message: '请稍后',
 			translucent: true,
 			cssClass: 'ion-loading-customer'

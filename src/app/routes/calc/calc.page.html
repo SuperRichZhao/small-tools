@@ -3,11 +3,13 @@
     <ion-title>
       休息日历
     </ion-title>
-<!--    <ion-buttons slot="primary">-->
-<!--      <ion-button color="danger" fill="outline">-->
-<!--        回到今天-->
-<!--      </ion-button>-->
-<!--    </ion-buttons>-->
+    <ion-buttons slot="primary">
+      <ion-buttons slot="end">
+        <ion-label color="danger">
+          <ion-datetime [value]="selectWorkDate" displayFormat="YYYY年MM月DD日" placeholder="设置最近一天上班时间" (ionChange)="changeFirstWorkDate($event)"></ion-datetime>
+        </ion-label>
+      </ion-buttons>
+    </ion-buttons>
   </ion-toolbar>
   <ion-grid>
     <ion-row>
@@ -27,7 +29,7 @@
       <ion-row class="month-days">
         <div class="item" *ngFor="let val of item.days" (click)="triggerConfirm(val)">
           <div *ngIf="val.day">
-            <div class="value" [ngClass]="{'checked': val.isChecked && val.isRest !== '2', 'today': val.isToday, 'rest': val.isRest === '0', 'work': val.isRest === '1'}">
+            <div class="value" [ngClass]="{'checked': val.isChecked && val.isRest !== '2', 'today': val.isToday && val.isRest !== '2', 'rest': val.isRest === '0', 'work': val.isRest === '1'}">
               {{ val.day }}
             </div>
             <div class="point">

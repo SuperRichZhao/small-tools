@@ -10,8 +10,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { TokenInterceptor } from './core/net/interceptor';
 
 @NgModule({
   declarations: [AppComponent],
@@ -28,7 +30,9 @@ import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    { provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true},
+    { provide: LocationStrategy, useClass: HashLocationStrategy}
   ],
   bootstrap: [AppComponent]
 })
