@@ -14,13 +14,14 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { NgZorroAntdMobileModule } from 'ng-zorro-antd-mobile';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { TokenInterceptor } from './core/net/interceptor';
+import { MenuPopoverComponent } from './shared/component/menu-popover/menu-popover.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, MenuPopoverComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
-    IonicModule.forRoot({ backButtonText: '返回', mode: 'ios' }),
+    IonicModule.forRoot({ backButtonText: '返回', mode: 'ios', backButtonIcon: 'chevron-back-outline' }),
     AppRoutingModule,
     BrowserAnimationsModule,
     FormsModule,
